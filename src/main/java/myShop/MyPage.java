@@ -14,9 +14,17 @@ public class MyPage {
         private String productId;
         private Integer qty;
         private String status;
+        private String notiStatus;
 
+    public String getNotiStatus() {
+        return notiStatus;
+    }
 
-        public Long getId() {
+    public void setNotiStatus(String notiStatus) {
+        this.notiStatus = notiStatus;
+    }
+
+    public Long getId() {
             return id;
         }
 

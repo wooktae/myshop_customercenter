@@ -71,4 +71,40 @@ public class MyPageViewHandler {
         }
     }
 
+    @StreamListener(KafkaProcessor.INPUT)
+    public void whenNoticeSended_then_UPDATE_3(@Payload NoticeSended noticeSended) {
+        try {
+            if (noticeSended.isMe()) {
+                // view 객체 조회
+                List<MyPage> myPageList = myPageRepository.findByOrderId(noticeSended.getOrderId());
+                for(MyPage myPage : myPageList){
+                    // view 객체에 이벤트의 eventDirectValue 를 set 함
+                    myPage.setNotiStatus(noticeSended.getNotiStatus());
+                    // view 레파지 토리에 save
+                    myPageRepository.save(myPage);
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @StreamListener(KafkaProcessor.INPUT)
+    public void whenCancelNoticeSended_then_UPDATE_4(@Payload CancelNoticeSended cancelNoticeSended) {
+        try {
+            if (cancelNoticeSended.isMe()) {
+                // view 객체 조회
+                List<MyPage> myPageList = myPageRepository.findByOrderId(cancelNoticeSended.getOrderId());
+                for(MyPage myPage : myPageList){
+                    // view 객체에 이벤트의 eventDirectValue 를 set 함
+                    myPage.setNotiStatus(cancelNoticeSended.getNotiStatus());
+                    // view 레파지 토리에 save
+                    myPageRepository.save(myPage);
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

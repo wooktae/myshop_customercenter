@@ -30,7 +30,15 @@ spring:
         event-out:
           destination: myShop
           contentType: application/json
-
+#  h2:
+#    console:
+#      enabled: true
+#      path: /db_customercenter
+#  datasource:
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:file:./h2_db;AUTO_SERVER=TRUE
+#    username: admin
+#    password: admin
 logging:
   level:
     org.hibernate.type: trace
